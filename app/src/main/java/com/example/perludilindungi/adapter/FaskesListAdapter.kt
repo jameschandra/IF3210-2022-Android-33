@@ -22,11 +22,16 @@ class FaskesListAdapter : RecyclerView.Adapter<FaskesListAdapter.FaskesListViewH
     }
 
     override fun getItemCount(): Int {
-        return faskesList.size
+        return if (faskesList.size < 5) {
+            faskesList.size
+        } else {
+            5
+        }
     }
 
     override fun onBindViewHolder(holder: FaskesListViewHolder, position: Int) {
-        Log.d("FASKES","onbind faskes")
+        Log.d("FASKES", "onbind faskes")
+
         val currentItem = faskesList[position]
         holder.itemView.faskeslist_name.text = currentItem.nama
         holder.itemView.faskeslist_category.text = currentItem.jenis_faskes
@@ -38,7 +43,7 @@ class FaskesListAdapter : RecyclerView.Adapter<FaskesListAdapter.FaskesListViewH
     }
 
     fun setData(faskesList: List<FaskesData>) {
-        Log.d("FASKES","set data faskes")
+        Log.d("FASKES", "set data faskes")
         this.faskesList = faskesList
         notifyDataSetChanged()
     }
