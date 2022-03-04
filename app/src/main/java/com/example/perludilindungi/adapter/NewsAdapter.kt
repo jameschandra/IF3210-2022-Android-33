@@ -29,7 +29,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>(){
         Glide.with(holder.itemView.context).load(newsList[position].enclosure._url).into(holder.itemView.imageView)
     }
 
-    fun setData(newNewsList: List<NewsData>){
+    fun setData(newNewsList: ArrayList<NewsData>){
         newsList = newNewsList
         notifyDataSetChanged()
     }
