@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.perludilindungi.R
 import com.example.perludilindungi.adapter.FaskesListAdapter
@@ -66,6 +67,12 @@ class FaskesListFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     if (it != null) {
                         Log.d("FASKES", "it not null")
                         faskesListAdapter.setData(it)
+                        faskesListAdapter.setOnClickRowListener(object: FaskesListAdapter.onClickRowListener {
+                            override fun onClickRowAt(position: Int) {
+                                // TODO: CHECK LATER
+                                Navigation.findNavController(view).navigate(FaskesListFragmentDirections.actionNavigationHomeToFaskesDetailFragment(it[position]))
+                            }
+                        })
                     } else {
                         Log.d("FASKES", "it null")
                     }

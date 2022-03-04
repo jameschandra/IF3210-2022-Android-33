@@ -1,4 +1,4 @@
-package com.example.perludilindungi.ui.notifications
+package com.example.perludilindungi.ui.bookmark
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.perludilindungi.R
-import com.example.perludilindungi.databinding.FragmentNotificationsBinding
+import com.example.perludilindungi.databinding.FragmentBookmarkBinding
 
-class NotificationsFragment : Fragment() {
+class BookmarkFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentNotificationsBinding? = null
+    private lateinit var bookmarkViewModel: BookmarkViewModel
+    private var _binding: FragmentBookmarkBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,14 +24,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        bookmarkViewModel =
+            ViewModelProvider(this).get(BookmarkViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        bookmarkViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

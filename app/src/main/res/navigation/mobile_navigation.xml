@@ -9,17 +9,49 @@
         android:id="@+id/navigation_home"
         android:name="com.example.perludilindungi.ui.faskes.FaskesListFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_faskeslist" />
+        tools:layout="@layout/fragment_faskeslist" >
+        <action
+            android:id="@+id/action_navigation_home_to_faskesDetailFragment"
+            app:destination="@id/faskesDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_news"
         android:name="com.example.perludilindungi.ui.news.NewsFragment"
         android:label="@string/title_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_navigation_news_to_beritaDetailFragment2"
+            app:destination="@id/beritaDetailFragment2" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.perludilindungi.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_bookmark"
+        android:name="com.example.perludilindungi.ui.bookmark.BookmarkFragment"
+        android:label="@string/title_bookmark"
+        tools:layout="@layout/fragment_bookmark" />
+
+    <fragment
+        android:id="@+id/faskesDetailFragment"
+        android:name="com.example.perludilindungi.ui.faskes_detail.FaskesDetailFragment"
+        android:label="FaskesDetailFragment"
+        tools:layout="@layout/fragment_faskes_detail">
+        <argument
+            android:name="faskes"
+            app:argType="com.example.perludilindungi.models.FaskesData" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/beritaDetailFragment2"
+        android:name="com.example.perludilindungi.ui.berita_detail.BeritaDetailFragment"
+        android:label="fragment_berita_detail"
+        tools:layout="@layout/fragment_berita_detail" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_beritaDetailFragment2_to_navigation_news"
+            app:destination="@id/navigation_news" />
+    </fragment>
+
 </navigation>
