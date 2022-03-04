@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.perludilindungi.adapter.NewsAdapter
 import com.example.perludilindungi.databinding.FragmentNewsBinding
@@ -46,6 +47,12 @@ class NewsFragment : Fragment() {
                 response.body()?.results.let {
                     if (it != null) {
                         newsAdapter.setData(it)
+                        newsAdapter.setOnClickRowListener(object: NewsAdapter.onClickRowListener {
+                            override fun onClickRowAt(position: Int) {
+                                // TODO: CHECK LATER
+                                Navigation.findNavController(binding.root).navigate(NewsFragmentDirections.actionNavigationNewsToBeritaDetailFragment2(it[position].guid))
+                            }
+                        })
                     }
                 }
             } else {
