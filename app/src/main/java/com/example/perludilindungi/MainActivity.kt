@@ -31,5 +31,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        setContentView(R.layout.activity_main)
+        val textView:TextView = findViewById(R.id.textView)
+        val qrButton:ImageButton = findViewById(R.id.qr_button)
+        qrButton.setOnClickListener({
+            val intentIntegrator = IntentIntegrator(this)
+            intentIntegrator.setDesiredBarcodeFormats(listOf(IntentIntegrator.QR_CODE))
+            intentIntegrator.initiateScan()
     }
 }
