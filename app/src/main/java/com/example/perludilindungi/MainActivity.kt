@@ -26,10 +26,17 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_news, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_news, R.id.navigation_bookmark
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        setContentView(R.layout.activity_main)
+        val textView:TextView = findViewById(R.id.textView)
+        val qrButton:ImageButton = findViewById(R.id.qr_button)
+        qrButton.setOnClickListener({
+            val intentIntegrator = IntentIntegrator(this)
+            intentIntegrator.setDesiredBarcodeFormats(listOf(IntentIntegrator.QR_CODE))
+            intentIntegrator.initiateScan()
     }
 }

@@ -1,5 +1,7 @@
 package com.example.perludilindungi.models
 
+import java.io.Serializable
+
 data class FaskesResponse (
     val success: Boolean,
     val message: String,
@@ -22,7 +24,7 @@ data class FaskesData (
     val status: String,
     val detail: List<FaskesDetailData>,
     val source_data: String,
-)
+): Serializable
 
 data class FaskesDetailData (
     val id: Int,
