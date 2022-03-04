@@ -19,7 +19,6 @@ import com.example.perludilindungi.data.FaskesDatabase
 import com.example.perludilindungi.databinding.FragmentFaskesDetailBinding
 import com.example.perludilindungi.databinding.FragmentHomeBinding
 import com.example.perludilindungi.models.FaskesData
-import com.example.perludilindungi.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
 import javax.sql.CommonDataSource
 

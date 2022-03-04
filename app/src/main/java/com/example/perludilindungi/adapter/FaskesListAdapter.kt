@@ -11,8 +11,24 @@ import kotlinx.android.synthetic.main.recycler_row_faskeslist.view.*
 
 class FaskesListAdapter : RecyclerView.Adapter<FaskesListAdapter.FaskesListViewHolder>() {
     private var faskesList = emptyList<FaskesData>()
+    private lateinit var clickListener: onClickRowListener
+
+    interface onClickRowListener {
+        fun onClickRowAt(position: Int)
+    }
+
+    fun setOnClickRowListener(clickListener: onClickRowListener) {
+        this.clickListener = clickListener
+    }
 
     inner class FaskesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
+        init {
+            itemView.setOnClickListener { view ->
+                clickListener.onClickRowAt(position)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaskesListViewHolder {
         return FaskesListViewHolder(
