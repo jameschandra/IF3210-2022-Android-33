@@ -4,7 +4,7 @@ data class FaskesResponse (
     val success: Boolean,
     val message: String,
     val count_total: Int,
-    val results: List<FaskesData>,
+    val data: List<FaskesData>,
 )
 
 data class FaskesData (
