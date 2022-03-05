@@ -3,14 +3,18 @@ package com.example.perludilindungi.ui.qrcode
 import android.hardware.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.budiyev.android.codescanner.*
+import com.budiyev.android.codescanner.ErrorCallback.SUPPRESS
 import android.widget.TextView
 import com.example.perludilindungi.R
 import com.example.perludilindungi.databinding.ActivityQrcodeBinding
 
-class Qrcode : AppCompatActivity(), SensorEventListener {
+class Qrcode : AppCompatActivity() {
     private var suhu: Sensor? = null
     private lateinit var sensorManager: SensorManager
     private lateinit var binding: ActivityQrcodeBinding
+    private lateinit var codeScanner: CodeScanner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +27,35 @@ class Qrcode : AppCompatActivity(), SensorEventListener {
 
         binding.backButton.setOnClickListener {
             onBackPressed()
+        }
+        
+        val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
+
+        codeScanner = CodeScanner(this, scannerView!!)
+
+        // Parameters (default values)
+        codeScanner.camera = CodeScanner.CAMERA_BACK // or CAMERA_FRONT or specific camera id
+        codeScanner.formats = CodeScanner.ALL_FORMATS
+        codeScanner.autoFocusMode = AutoFocusMode.SAFE // or CONTINUOUS
+        codeScanner.scanMode = ScanMode.SINGLE // or CONTINUOUS or PREVIEW
+        codeScanner.isAutoFocusEnabled = true // Whether to enable auto focus or not
+        codeScanner.isFlashEnabled = false // Whether to enable flash or not
+
+        // Callbacks
+        codeScanner.decodeCallback = DecodeCallback {
+            runOnUiThread {
+                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+            }
+        }
+        codeScanner.errorCallback = ErrorCallback{ // or ErrorCallback.SUPPRESS
+            runOnUiThread {
+                Toast.makeText(this, "Camera initialization error: ${it.message}",
+                    Toast.LENGTH_LONG).show()
+            }
+        }
+
+        scannerView.setOnClickListener {
+            codeScanner.startPreview()
         }
     }
 
@@ -41,14 +74,15 @@ class Qrcode : AppCompatActivity(), SensorEventListener {
 //    }
 
     override fun onResume() {
-        // Register a listener for the sensor.
         sensorManager.registerListener(this, suhu, SensorManager.SENSOR_DELAY_NORMAL)
         super.onResume()
+        codeScanner.startPreview()
     }
 
     override fun onPause() {
-        // Be sure to unregister the sensor when the activity pauses.
+        codeScanner.releaseResources()
         super.onPause()
         sensorManager.unregisterListener(this)
     }
-}
+} // list of type BarcodeFormat,
+        // ex. listOf(BarcodeFormat.QR_COD

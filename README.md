@@ -10,6 +10,7 @@ Pemanggilan data dinamik dilakukan dengan dua cara, pertama adalah dengan pemang
 
 ## Library yang Digunakan
 ### Retrofit
+### code-scanner by yuriy-budiyev
 
 HTTP Client dengan dokumentasi terbanyak dan paling marak digunakan
 ### Coroutines

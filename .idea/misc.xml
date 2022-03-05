@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Stefanus/if3210-2022-android-33/app/src/main/res/layout/activity_main.xml" value="0.125" />
+        <entry key="..\:/Users/Stefanus/if3210-2022-android-33/app/src/main/res/layout/activity_qrcode.xml" value="0.125" />
+        <entry key="..\:/Users/Stefanus/if3210-2022-android-33/app/src/main/res/layout/fragment_berita_detail.xml" value="0.125" />
+        <entry key="..\:/Users/Stefanus/if3210-2022-android-33/app/src/main/res/layout/fragment_news.xml" value="0.125" />
+        <entry key="..\:/Users/Stefanus/if3210-2022-android-33/app/src/main/res/layout/fragment_qr.xml" value="0.176" />
+        <entry key="..\:/Users/Stefanus/if3210-2022-android-33/app/src/main/res/layout/recycler_row_faskeslist.xml" value="0.125" />
+        <entry key="..\:/Users/Stefanus/if3210-2022-android-33/app/src/main/res/layout/recycler_row_news.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/ic_qr_code.xml" value="0.18981481481481483" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_qrcode.xml" value="0.335" />
