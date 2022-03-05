@@ -14,7 +14,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.perludilindungi.databinding.ActivityMainBinding
-import com.example.perludilindungi.ui.qrcode.QrFragment
 import com.example.perludilindungi.ui.qrcode.Qrcode
 
 class MainActivity : AppCompatActivity() {

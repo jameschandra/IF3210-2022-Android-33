@@ -5,6 +5,7 @@ import com.example.perludilindungi.models.CityResponse
 import com.example.perludilindungi.models.FaskesResponse
 import com.example.perludilindungi.models.NewsResponse
 import com.example.perludilindungi.models.ProvinceResponse
+
 import retrofit2.Response
 
 class Repository {
@@ -23,4 +24,5 @@ class Repository {
     suspend fun getFaskes(province: String, city: String): Response<FaskesResponse> {
         return RetrofitInstance.faskesInstance.getFaskes(province, city)
     }
+
 }

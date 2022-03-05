@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FaskesDao {
     @Query("SELECT * FROM faskes")
-    fun getAll(): Flow<List<Faskes>>
+    fun getAll(): LiveData<List<Faskes>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(faskes: Faskes)

@@ -29,7 +29,11 @@
         android:id="@+id/navigation_bookmark"
         android:name="com.example.perludilindungi.ui.bookmark.BookmarkFragment"
         android:label="@string/title_bookmark"
-        tools:layout="@layout/fragment_bookmark" />
+        tools:layout="@layout/fragment_bookmark" >
+        <action
+            android:id="@+id/action_navigation_bookmark_to_faskesDetailFragment"
+            app:destination="@id/faskesDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/faskesDetailFragment"
@@ -39,6 +43,9 @@
         <argument
             android:name="faskes"
             app:argType="com.example.perludilindungi.models.FaskesData" />
+        <action
+            android:id="@+id/action_faskesDetailFragment_to_navigation_bookmark"
+            app:destination="@id/navigation_bookmark" />
     </fragment>
 
     <fragment
