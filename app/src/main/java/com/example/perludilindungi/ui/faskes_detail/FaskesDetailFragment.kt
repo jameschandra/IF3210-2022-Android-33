@@ -3,6 +3,7 @@ package com.example.perludilindungi.ui.faskes_detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,8 @@ class FaskesDetailFragment: Fragment() {
         binding.noTelp.text = faskes.telp
         binding.status.text = faskes.status
         binding.tipeFaskes.text = faskes.jenis_faskes
+        Log.d("STATUS", faskes.status)
+        Log.d("TEST", "CONSOLE")
         if (faskes.status != "Siap Vaksinasi") {
             binding.statusImage.setImageResource(R.drawable.ic_tidak)
         }
@@ -80,6 +83,7 @@ class FaskesDetailFragment: Fragment() {
         var faskesInsert = Faskes()
 
         faskesInsert.alamat = faskes.alamat
+        faskesInsert.nama = faskes.nama
         faskesInsert.id = faskes.id
         faskesInsert.kode = faskes.kode
         faskesInsert.jenis_faskes = faskes.jenis_faskes

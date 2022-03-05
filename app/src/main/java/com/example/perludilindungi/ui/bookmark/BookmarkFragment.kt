@@ -65,8 +65,8 @@ class BookmarkFragment : Fragment() {
                                             it[position].telp,
                                             it[position].jenis_faskes,
                                             "",
-                                            it[position].status,
                                             "",
+                                            it[position].status,
                                             ArrayList(),
                                             "",
                                         )
