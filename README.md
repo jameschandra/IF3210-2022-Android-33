@@ -33,6 +33,6 @@ Library untuk melakukan loading image resource pada suatu ImageView
 ## Pembagian Kerja
 | NIM      | Nama           | Tugas                                    |
 |----------|----------------|------------------------------------------|
-| 13519064 | Aditya Bimawan | Daftar Faskes, Bookmark, QR Code         |
+| 13519064 | Aditya Bimawan | Daftar Faskes, Bookmark                  |
 | 13519078 | James Chandra  | Berita, Detail Faskes, Bookmark, QR Code |
-| 13519101 | Stefanus       | -                                        |
+| 13519101 | Stefanus       | QR Code, Suhu, Camera                    |
