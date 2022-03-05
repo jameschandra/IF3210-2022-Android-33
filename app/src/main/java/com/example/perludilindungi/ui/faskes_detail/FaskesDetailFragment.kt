@@ -60,8 +60,16 @@ class FaskesDetailFragment: Fragment() {
             lifecycleScope.launch{
                 onClickBookmark(database)
             }
-//            view.findNavController()
-//                .navigate(R.id.diwajdiawjdiawjdiaw)
+            view.findNavController()
+                .navigate(FaskesDetailFragmentDirections.actionFaskesDetailFragmentToNavigationBookmark())
+        }
+
+        binding.unbookmark.setOnClickListener { view: View ->
+            lifecycleScope.launch{
+                onClickUnbookmark(database)
+            }
+            view.findNavController()
+                .navigate(FaskesDetailFragmentDirections.actionFaskesDetailFragmentToNavigationBookmark())
         }
 
         binding.googleMap.setOnClickListener {
@@ -94,5 +102,22 @@ class FaskesDetailFragment: Fragment() {
         faskesInsert.status = faskes.status
 
         database.insert(faskesInsert)
+    }
+
+    private suspend fun onClickUnbookmark(database: FaskesDao) {
+        var faskesInsert = Faskes()
+
+        faskesInsert.alamat = faskes.alamat
+        faskesInsert.nama = faskes.nama
+        faskesInsert.id = faskes.id
+        faskesInsert.kode = faskes.kode
+        faskesInsert.jenis_faskes = faskes.jenis_faskes
+        faskesInsert.alamat = faskes.alamat
+        faskesInsert.latitude = faskes.latitude
+        faskesInsert.longitude = faskes.longitude
+        faskesInsert.telp = faskes.telp
+        faskesInsert.status = faskes.status
+
+        database.delete(faskesInsert)
     }
 }

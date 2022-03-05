@@ -43,6 +43,9 @@
         <argument
             android:name="faskes"
             app:argType="com.example.perludilindungi.models.FaskesData" />
+        <action
+            android:id="@+id/action_faskesDetailFragment_to_navigation_bookmark"
+            app:destination="@id/navigation_bookmark" />
     </fragment>
 
     <fragment
