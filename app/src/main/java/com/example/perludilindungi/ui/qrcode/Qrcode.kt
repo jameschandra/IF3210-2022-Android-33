@@ -31,6 +31,8 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
     private lateinit var binding: ActivityQrcodeBinding
     private lateinit var codeScanner: CodeScanner
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var lat: Double = 0.0
+    private var lon : Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,8 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         suhu = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        getUserLocation()
 
         binding.backButton.setOnClickListener {
             onBackPressed()
@@ -65,8 +69,8 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
 
                 val reqBodyObject = JSONObject()
                 reqBodyObject.put("qrCode", it.text)
-                reqBodyObject.put("latitude", "38.8951")
-                reqBodyObject.put("longitude", "-77.0364")
+                reqBodyObject.put("latitude", lat.toString())
+                reqBodyObject.put("longitude", lon.toString())
 
                 val httpReqBody =
                     reqBodyObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
@@ -156,8 +160,8 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
             if (location == null) {
 //                Location null
             } else {
-                val lat = location.latitude
-                val lon = location.longitude
+                lat = location.latitude
+                lon = location.longitude
             }
         }
 
