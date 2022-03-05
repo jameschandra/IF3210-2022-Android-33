@@ -16,7 +16,7 @@ class FaskesListViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getFaskesList(province: String, city: String){
         viewModelScope.launch {
-            val response = repository.getFaskes(province,city)
+            val response = repository.getFaskes(province, city)
             faskesList.value = response
         }
     }

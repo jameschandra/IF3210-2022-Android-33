@@ -19,7 +19,7 @@ data class FaskesData (
     val latitude: String,
     val longitude: String,
     val telp: String,
-    val jenis_faskes: String ,
+    val jenis_faskes: String,
     val kelas_rs: String,
     val status: String,
     val detail: List<FaskesDetailData>,

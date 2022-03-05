@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.perludilindungi.R
+import com.example.perludilindungi.data.Faskes
 import com.example.perludilindungi.models.FaskesData
 import kotlinx.android.synthetic.main.recycler_row_faskeslist.view.*
 

@@ -13,6 +13,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.perludilindungi.R
 import com.example.perludilindungi.adapter.FaskesListAdapter
+import com.example.perludilindungi.data.Faskes
+import com.example.perludilindungi.models.FaskesData
 import kotlinx.android.synthetic.main.fragment_faskeslist.view.*
 
 
@@ -60,5 +62,22 @@ class FaskesListFragment : Fragment() {
 
         return view
     }
+
+//    fun mapperToFaskes(faskesData: List<FaskesData>): List<Faskes> {
+//        var faskesMap: List<Faskes> = faskesData.map {
+//            Faskes(
+//            it.id,
+//            it.kode,
+//            it.nama,
+//            it.alamat,
+//            it.latitude,
+//            it.longitude,
+//            it.telp,
+//            it.jenis_faskes,
+//            it.status,
+//        ) }
+//
+//        return faskesMap
+//    }
 
 }
