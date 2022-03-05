@@ -12,7 +12,7 @@ data class Faskes (
     @ColumnInfo(name = "kode")
     var kode: String = "",
     @ColumnInfo(name = "nama")
-    val nama: String = "",
+    var nama: String = "",
     @ColumnInfo(name = "alamat")
     var alamat: String = "",
     @ColumnInfo(name = "latitude")
