@@ -1,13 +1,42 @@
 package com.example.perludilindungi.ui.bookmark
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.perludilindungi.data.Faskes
+import com.example.perludilindungi.data.FaskesDao
+import com.example.perludilindungi.models.FaskesData
+import com.example.perludilindungi.models.FaskesResponse
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
-class BookmarkViewModel : ViewModel() {
+class BookmarkViewModel(private val faskesDao: FaskesDao) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    var bookmarksList: Flow<List<FaskesData>> = emptyFlow()
+
+    fun getBookmarks() {
+        viewModelScope.launch {
+            val result = faskesDao.getAll()
+            bookmarksList = flow { result.first().map { mapperComplicateToFaskesData(it) } }
+        }
     }
-    val text: LiveData<String> = _text
+
+    fun mapperComplicateToFaskesData(faskes: Faskes): FaskesData {
+        return FaskesData(
+            faskes.id,
+            faskes.kode,
+            faskes.nama,
+            "",
+            "",
+            faskes.alamat,
+            faskes.latitude,
+            faskes.telp,
+            faskes.jenis_faskes,
+            "",
+            faskes.status,
+            "",
+            ArrayList(),
+            "",
+        )
+    }
+
 }

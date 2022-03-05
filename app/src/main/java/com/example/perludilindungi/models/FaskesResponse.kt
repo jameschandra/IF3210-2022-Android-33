@@ -6,7 +6,7 @@ data class FaskesResponse (
     val success: Boolean,
     val message: String,
     val count_total: Int,
-    val results: List<FaskesData>,
+    val data: List<FaskesData>,
 )
 
 data class FaskesData (
@@ -19,7 +19,7 @@ data class FaskesData (
     val latitude: String,
     val longitude: String,
     val telp: String,
-    val jenis_faskes: String ,
+    val jenis_faskes: String,
     val kelas_rs: String,
     val status: String,
     val detail: List<FaskesDetailData>,
