@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.perludilindungi.R
 import com.example.perludilindungi.databinding.ActivityQrcodeBinding
 
-class Qrcode : AppCompatActivity() {
+class Qrcode : AppCompatActivity(), SensorEventListener2 {
     private var suhu: Sensor? = null
     private lateinit var sensorManager: SensorManager
     private lateinit var binding: ActivityQrcodeBinding
@@ -69,9 +69,9 @@ class Qrcode : AppCompatActivity() {
         // NO IMPLEMENTATION
     }
 
-//    override fun onFlushCompleted(p0: Sensor?) {
-//        // NO IMPLEMENTATION
-//    }
+    override fun onFlushCompleted(p0: Sensor?) {
+        // NO IMPLEMENTATION
+    }
 
     override fun onResume() {
         sensorManager.registerListener(this, suhu, SensorManager.SENSOR_DELAY_NORMAL)
