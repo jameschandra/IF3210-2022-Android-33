@@ -57,8 +57,8 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
 
                 val reqBodyObject = JSONObject()
                 reqBodyObject.put("qrCode", it.text)
-                reqBodyObject.put("latitude", 38.8951)
-                reqBodyObject.put("longitude", -77.0364)
+                reqBodyObject.put("latitude", "38.8951")
+                reqBodyObject.put("longitude", "-77.0364")
 
                 val httpReqBody = reqBodyObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
 
