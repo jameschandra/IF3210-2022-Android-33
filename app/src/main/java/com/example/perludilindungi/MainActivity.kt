@@ -1,5 +1,6 @@
 package com.example.perludilindungi
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -10,6 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.perludilindungi.databinding.ActivityMainBinding
+import com.example.perludilindungi.ui.qrcode.QrFragment
+import com.example.perludilindungi.ui.qrcode.Qrcode
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val fab = binding.fab
+        fab.setOnClickListener{
+            val intent = Intent(this, Qrcode::class.java)
+            startActivity(intent)
+        }
 //        setContentView(R.layout.activity_main)
 //        val textView: TextView = findViewById(R.id.textView)
 //        val qrButton: ImageButton = findViewById(R.id.qr_button)

@@ -37,23 +37,23 @@ class BookmarkFragment : Fragment() {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val database = FaskesDatabase.getDatabase(requireNotNull(this.activity).application).faskesDao
-
+//        val database = FaskesDatabase.getDatabase(requireNotNull(this.activity).application).faskesDao
+//
         val faskesListAdapter = FaskesListAdapter()
         var recyclerView = root.recyclerView_bookmark
         recyclerView.adapter = faskesListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        bookmarkViewModel = BookmarkViewModel(database)
-        bookmarkViewModel.getBookmarks()
-
-        var flowListBookmark: List<FaskesData>
-
-        runBlocking(Dispatchers.IO) {
-            flowListBookmark = bookmarkViewModel.bookmarksList.first()
-        }
-
-        faskesListAdapter.setData(flowListBookmark)
+//
+//        bookmarkViewModel = BookmarkViewModel(database)
+//        bookmarkViewModel.getBookmarks()
+//
+//        var flowListBookmark: List<FaskesData>
+//
+//        runBlocking(Dispatchers.IO) {
+//            flowListBookmark = bookmarkViewModel.bookmarksList.first()
+//        }
+//
+//        faskesListAdapter.setData(flowListBookmark)
 
         return root
     }
