@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.perludilindungi.adapter.BookmarkAdapter
 import com.example.perludilindungi.adapter.FaskesListAdapter
 import com.example.perludilindungi.data.Faskes
 import com.example.perludilindungi.data.FaskesDatabase
@@ -37,23 +39,42 @@ class BookmarkFragment : Fragment() {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val database = FaskesDatabase.getDatabase(requireNotNull(this.activity).application).faskesDao
-//
-        val faskesListAdapter = FaskesListAdapter()
+        val database = FaskesDatabase.getDatabase(requireNotNull(this.activity).application).faskesDao
+
+        val bookmarkAdapter = BookmarkAdapter()
         var recyclerView = root.recyclerView_bookmark
-        recyclerView.adapter = faskesListAdapter
+        recyclerView.adapter = bookmarkAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-//
-//        bookmarkViewModel = BookmarkViewModel(database)
-//        bookmarkViewModel.getBookmarks()
-//
-//        var flowListBookmark: List<FaskesData>
-//
-//        runBlocking(Dispatchers.IO) {
-//            flowListBookmark = bookmarkViewModel.bookmarksList.first()
-//        }
-//
-//        faskesListAdapter.setData(flowListBookmark)
+
+        bookmarkViewModel = BookmarkViewModel(database)
+        bookmarkViewModel.getBookmarks()
+        bookmarkViewModel.bookmarksList.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                bookmarkAdapter.setData(it)
+                bookmarkAdapter.setOnClickRowListener(object: BookmarkAdapter.onClickRowListener {
+                    override fun onClickRowAt(position: Int) {
+                        // TODO: CHECK LATER
+                        var faskesData = FaskesData(
+                                            it[position].id,
+                                            it[position].kode,
+                                            it[position].nama,
+                                            "",
+                                            "",
+                                            it[position].alamat,
+                                            it[position].latitude,
+                                            it[position].telp,
+                                            it[position].jenis_faskes,
+                                            "",
+                                            it[position].status,
+                                            "",
+                                            ArrayList(),
+                                            "",
+                                        )
+                        Navigation.findNavController(root).navigate(BookmarkFragmentDirections.actionNavigationBookmarkToFaskesDetailFragment(faskesData))
+                    }
+                })
+            }
+        })
 
         return root
     }
