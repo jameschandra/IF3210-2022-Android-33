@@ -1,6 +1,9 @@
 package com.example.perludilindungi.ui.qrcode
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.hardware.*
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +11,12 @@ import android.widget.Toast
 import com.budiyev.android.codescanner.*
 import com.budiyev.android.codescanner.ErrorCallback.SUPPRESS
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import com.example.perludilindungi.R
 import com.example.perludilindungi.api.RetrofitInstance
 import com.example.perludilindungi.databinding.ActivityQrcodeBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +30,7 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
     private lateinit var sensorManager: SensorManager
     private lateinit var binding: ActivityQrcodeBinding
     private lateinit var codeScanner: CodeScanner
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +40,12 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
 
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         suhu = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
-        
+
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
 
         codeScanner = CodeScanner(this, scannerView!!)
@@ -60,11 +68,13 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
                 reqBodyObject.put("latitude", "38.8951")
                 reqBodyObject.put("longitude", "-77.0364")
 
-                val httpReqBody = reqBodyObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
+                val httpReqBody =
+                    reqBodyObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
 
                 CoroutineScope(Dispatchers.IO).launch {
                     // Do the POST request and get response
-                    val res = RetrofitInstance.checkInInstance.postCheckIn(requestBody = httpReqBody)
+                    val res =
+                        RetrofitInstance.checkInInstance.postCheckIn(requestBody = httpReqBody)
 
                     withContext(Dispatchers.Main) {
                         if (res.isSuccessful) {
@@ -84,10 +94,12 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
                 }
             }
         }
-        codeScanner.errorCallback = ErrorCallback{ // or ErrorCallback.SUPPRESS
+        codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             runOnUiThread {
-                Toast.makeText(this, "Camera initialization error: ${it.message}",
-                    Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this, "Camera initialization error: ${it.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
@@ -121,5 +133,34 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
         super.onPause()
         sensorManager.unregisterListener(this)
     }
+
+    private fun getUserLocation() {
+        Log.d("FASKES", "IN SEARCH FASKES")
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+                // No permission for location
+            return
+        }
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location == null) {
+//                Location null
+            } else {
+                val lat = location.latitude
+                val lon = location.longitude
+            }
+        }
+
+    }
 } // list of type BarcodeFormat,
-        // ex. listOf(BarcodeFormat.QR_COD
+// ex. listOf(BarcodeFormat.QR_COD
