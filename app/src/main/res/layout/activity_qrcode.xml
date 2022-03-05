@@ -13,9 +13,9 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="20dp"
       android:layout_marginTop="20dp"
-      android:background="#EF5DA8"
-      android:textColor="@color/white"
+      android:background="@color/purple_500"
       android:text="go back"
+      android:textColor="#D1C4E9"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
       android:id="@+id/derajat"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="60dp"
+      android:layout_marginTop="20dp"
       android:layout_marginEnd="20dp"
       android:width="80dp"
       android:height="80dp"
@@ -55,5 +55,31 @@
       android:textColor="#D1C4E9"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/status"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@color/purple_500"
+      android:gravity="center_vertical|center_horizontal"
+      android:text="status"
+      android:textColor="#D1C4E9"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      android:layout_marginBottom="120dp"/>
+
+  <TextView
+      android:id="@+id/keterangan"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:gravity="center_vertical|center_horizontal"
+      android:text="keterangan"
+      android:textColor="@color/purple_500"
+      app:layout_constraintTop_toBottomOf="@id/status"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      android:layout_marginBottom="120dp"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>

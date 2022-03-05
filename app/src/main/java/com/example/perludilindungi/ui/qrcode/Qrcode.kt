@@ -3,12 +3,21 @@ package com.example.perludilindungi.ui.qrcode
 import android.hardware.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.budiyev.android.codescanner.*
 import com.budiyev.android.codescanner.ErrorCallback.SUPPRESS
 import android.widget.TextView
 import com.example.perludilindungi.R
+import com.example.perludilindungi.api.RetrofitInstance
 import com.example.perludilindungi.databinding.ActivityQrcodeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 
 class Qrcode : AppCompatActivity(), SensorEventListener2 {
     private var suhu: Sensor? = null
@@ -45,6 +54,34 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+
+                val reqBodyObject = JSONObject()
+                reqBodyObject.put("qrCode", it.text)
+                reqBodyObject.put("latitude", 38.8951)
+                reqBodyObject.put("longitude", -77.0364)
+
+                val httpReqBody = reqBodyObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    // Do the POST request and get response
+                    val res = RetrofitInstance.checkInInstance.postCheckIn(requestBody = httpReqBody)
+
+                    withContext(Dispatchers.Main) {
+                        if (res.isSuccessful) {
+                            val resParse = res.body()
+                            if (resParse?.success == true) {
+                                Log.d("Hasil", resParse.data.toString())
+                                if (resParse.data.userStatus == "green") {
+                                    binding.status.setText("Berhasil")
+                                }
+                                else {
+                                    binding.status.setText("Gagal")
+                                    binding.keterangan.setText(resParse.data.reason)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         codeScanner.errorCallback = ErrorCallback{ // or ErrorCallback.SUPPRESS
