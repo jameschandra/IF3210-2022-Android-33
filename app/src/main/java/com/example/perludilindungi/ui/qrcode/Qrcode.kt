@@ -71,11 +71,11 @@ class Qrcode : AppCompatActivity(), SensorEventListener2 {
                             val resParse = res.body()
                             if (resParse?.success == true) {
                                 Log.d("Hasil", resParse.data.toString())
+                                binding.status.setText(resParse.data.userStatus)
+
                                 if (resParse.data.userStatus == "green") {
-                                    binding.status.setText("Berhasil")
-                                }
-                                else {
-                                    binding.status.setText("Gagal")
+                                    binding.keterangan.setText("Keterangan: OK!")
+                                } else {
                                     binding.keterangan.setText(resParse.data.reason)
                                 }
                             }
